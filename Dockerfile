@@ -25,9 +25,12 @@ RUN git checkout branch-2.3
 RUN patch -p0 <HIVE-12679.branch-2.3.patch
 RUN mvn clean install -DskipTests
 
-# BUILD PATCHED HIVE CLIENT
+# GET THE AWS REPO AND CONFIGURE POM
 WORKDIR /src
 RUN git clone https://github.com/awslabs/aws-glue-data-catalog-client-for-apache-hive-metastore.git
 WORKDIR /src/aws-glue-data-catalog-client-for-apache-hive-metastore
 COPY pom.xml /src/aws-glue-data-catalog-client-for-apache-hive-metastore
-RUN mvn clean package -DskipTests
+
+# BUILD THE HIVE CLIENT
+WORKDIR /src/aws-glue-data-catalog-client-for-apache-hive-metastore/aws-glue-datacatalog-hive2-client
+RUN mvn clean install -DskipTests
