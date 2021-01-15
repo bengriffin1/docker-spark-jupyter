@@ -30,7 +30,8 @@ WORKDIR /src
 RUN git clone https://github.com/awslabs/aws-glue-data-catalog-client-for-apache-hive-metastore.git
 WORKDIR /src/aws-glue-data-catalog-client-for-apache-hive-metastore
 COPY pom.xml /src/aws-glue-data-catalog-client-for-apache-hive-metastore
+RUN mvn clean install -DskipTests
 
 # BUILD THE HIVE CLIENT
 WORKDIR /src/aws-glue-data-catalog-client-for-apache-hive-metastore/aws-glue-datacatalog-hive2-client
-RUN mvn clean install -DskipTests
+# RUN mvn clean install -DskipTests
